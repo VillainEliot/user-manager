@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 export interface User {
   id: number;
@@ -14,14 +15,24 @@ export interface User {
 })
 export class UserService {
   private apiUrl = 'http://localhost:3000/users';
+  private usersSubject = new BehaviorSubject<User[]>([]);
+  users$ = this.usersSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadUsers();
+  }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+  loadUsers() {
+    this.http.get<User[]>(this.apiUrl).subscribe((users) => this.usersSubject.next(users));
   }
 
   addUser(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
+    return this.http.post<User>(this.apiUrl, user).pipe(
+      tap((newUser) => {
+        const current = this.usersSubject.getValue();
+        this.usersSubject.next([...current, newUser]);
+      })
+    );
   }
 }
+

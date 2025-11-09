@@ -1,0 +1,37 @@
+<form (ngSubmit)="addUser()" class="space-y-4">
+  <input
+    type="text"
+    placeholder="Nom"
+    [(ngModel)]="name"
+    name="name"
+    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    required
+  />
+
+  <input
+    type="email"
+    placeholder="Email"
+    [(ngModel)]="email"
+    name="email"
+    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    required
+  />
+
+  <select
+    [(ngModel)]="role"
+    name="role"
+    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    required
+  >
+    <option value="" disabled selected>Choisir un rôle</option>
+    <option value="user">User</option>
+    <option value="admin">Admin</option>
+  </select>
+
+  <button
+    type="submit"
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+  >
+    Ajouter
+  </button>
+</form>
