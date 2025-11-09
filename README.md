@@ -1,59 +1,76 @@
-# UserManager
+🧑‍💼 User Manager — Gestion d’utilisateurs (Angular + Express)
+🌐 Description
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+User Manager est une mini application fullstack permettant de gérer des utilisateurs simplement et efficacement.
+Elle combine un frontend Angular moderne avec Tailwind CSS pour le design, et un backend Express léger fonctionnant entièrement en mémoire (sans base de données).
 
-## Development server
+L’objectif est de démontrer une structure de projet claire, maintenable et fonctionnelle, tout en offrant une expérience utilisateur fluide et esthétique.
 
-To start a local development server, run:
+⚙️ Stack technique
+Frontend :
 
-```bash
+⚡ Angular 20 (standalone components)
+
+🎨 Tailwind CSS v4 pour le style responsive et moderne
+
+🔁 RxJS / Observables pour les appels à l’API
+
+🧩 TypeScript 5.9+
+
+Backend :
+
+🧠 Express.js
+
+🚫 Aucune base de données : stockage en mémoire
+
+🔄 API REST minimaliste (GET /users, POST /users)
+
+✨ Fonctionnalités principales
+
+✅ Affichage d’une liste d’utilisateurs sous forme de tableau
+🔍 Recherche en temps réel par nom
+➕ Formulaire d’ajout d’utilisateur (nom, email, rôle)
+🎨 Interface responsive
+⚙️ Communication HTTP via un service Angular dédié
+
+🧱 Structure du projet
+user-manager/
+│
+├── backend/
+│   ├── app.js            → Serveur Express
+│   ├── routes/users.js   → Routes GET/POST /users
+│   └── ...
+│
+└── frontend/
+    ├── src/
+    │   ├── app/
+    │   │   ├── components/
+    │   │   │   ├── user-table/
+    │   │   │   └── user-form/
+    │   │   ├── services/user.service.ts
+    │   │   ├── app.component.html
+    │   │   └── app.component.ts
+    │   └── styles.css (Tailwind)
+    └── ...
+
+🚀 Installation et exécution
+1️⃣ Cloner le projet
+Backend :
+https://github.com/VillainEliot/user-manager-api.git
+
+Frontend :
+https://github.com/VillainEliot/user-manager.git
+
+2️⃣ Démarrer le backend
+cd user-manager-api
+npm install
+npm start
+
+Serveur lancé sur http://localhost:3000
+
+3️⃣ Démarrer le frontend
+cd user-manager
+npm install
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Frontend accessible sur http://localhost:4200
