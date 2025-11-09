@@ -7,6 +7,7 @@ Elle combine un frontend Angular moderne avec Tailwind CSS pour le design, et un
 L’objectif est de démontrer une structure de projet claire, maintenable et fonctionnelle, tout en offrant une expérience utilisateur fluide et esthétique.
 
 ⚙️ Stack technique
+
 Frontend :
 
 ⚡ Angular 20 (standalone components)
