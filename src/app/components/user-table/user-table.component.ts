@@ -30,12 +30,10 @@ export class UserTableComponent {
       const valueA = a[this.sortField];
       const valueB = b[this.sortField];
 
-      // pour les nombres
       if (typeof valueA === 'number' && typeof valueB === 'number') {
         return this.sortAsc ? valueA - valueB : valueB - valueA;
       }
 
-      // pour les chaînes
       return this.sortAsc
         ? String(valueA).localeCompare(String(valueB))
         : String(valueB).localeCompare(String(valueA));
