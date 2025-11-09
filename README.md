@@ -1,4 +1,5 @@
 🧑‍💼 User Manager — Gestion d’utilisateurs (Angular + Express)
+
 🌐 Description
 
 User Manager est une mini application fullstack permettant de gérer des utilisateurs simplement et efficacement.
@@ -29,32 +30,18 @@ Backend :
 ✨ Fonctionnalités principales
 
 ✅ Affichage d’une liste d’utilisateurs sous forme de tableau
+
 🔍 Recherche en temps réel par nom
+
 ➕ Formulaire d’ajout d’utilisateur (nom, email, rôle)
+
 🎨 Interface responsive
+
 ⚙️ Communication HTTP via un service Angular dédié
 
-🧱 Structure du projet
-user-manager/
-│
-├── backend/
-│   ├── app.js            → Serveur Express
-│   ├── routes/users.js   → Routes GET/POST /users
-│   └── ...
-│
-└── frontend/
-    ├── src/
-    │   ├── app/
-    │   │   ├── components/
-    │   │   │   ├── user-table/
-    │   │   │   └── user-form/
-    │   │   ├── services/user.service.ts
-    │   │   ├── app.component.html
-    │   │   └── app.component.ts
-    │   └── styles.css (Tailwind)
-    └── ...
 
 🚀 Installation et exécution
+
 1️⃣ Cloner le projet
 
 Backend :
@@ -64,15 +51,21 @@ Frontend :
 https://github.com/VillainEliot/user-manager.git
 
 2️⃣ Démarrer le backend
+
 cd user-manager-api
+
 npm install
+
 npm start
 
 Serveur lancé sur http://localhost:3000
 
 3️⃣ Démarrer le frontend
+
 cd user-manager
+
 npm install
+
 ng serve
 
 Frontend accessible sur http://localhost:4200
