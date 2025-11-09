@@ -11,10 +11,18 @@
   <table class="min-w-full divide-y divide-gray-200 bg-white">
     <thead class="bg-gray-100">
     <tr>
-      <th class="px-4 py-3 text-left text-gray-600 font-medium uppercase text-sm">ID</th>
-      <th class="px-4 py-3 text-left text-gray-600 font-medium uppercase text-sm">Nom</th>
-      <th class="px-4 py-3 text-left text-gray-600 font-medium uppercase text-sm">Email</th>
-      <th class="px-4 py-3 text-left text-gray-600 font-medium uppercase text-sm">Rôle</th>
+      <th class="py-2 px-4 border cursor-pointer" (click)="toggleSort('id')">
+        ID <span *ngIf="sortField==='id'">{{ sortAsc ? '▲' : '▼' }}</span>
+      </th>
+      <th class="py-2 px-4 border cursor-pointer" (click)="toggleSort('name')">
+        Nom <span *ngIf="sortField==='name'">{{ sortAsc ? '▲' : '▼' }}</span>
+      </th>
+      <th class="py-2 px-4 border cursor-pointer" (click)="toggleSort('email')">
+        Email <span *ngIf="sortField==='email'">{{ sortAsc ? '▲' : '▼' }}</span>
+      </th>
+      <th class="py-2 px-4 border cursor-pointer" (click)="toggleSort('role')">
+        Rôle <span *ngIf="sortField==='role'">{{ sortAsc ? '▲' : '▼' }}</span>
+      </th>
     </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
