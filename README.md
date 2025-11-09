@@ -7,6 +7,7 @@ Elle combine un frontend Angular moderne avec Tailwind CSS pour le design, et un
 
 L’objectif est de démontrer une structure de projet claire, maintenable et fonctionnelle, tout en offrant une expérience utilisateur fluide et esthétique.
 
+
 ⚙️ Stack technique
 
 Frontend :
@@ -42,6 +43,7 @@ Backend :
 
 🚀 Installation et exécution
 
+
 1️⃣ Cloner le projet
 
 Backend :
@@ -49,6 +51,7 @@ https://github.com/VillainEliot/user-manager-api.git
 
 Frontend :
 https://github.com/VillainEliot/user-manager.git
+
 
 2️⃣ Démarrer le backend
 
@@ -59,6 +62,7 @@ npm install
 npm start
 
 Serveur lancé sur http://localhost:3000
+
 
 3️⃣ Démarrer le frontend
 
