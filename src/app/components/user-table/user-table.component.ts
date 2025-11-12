@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService, User } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -7,46 +7,62 @@ import { CommonModule } from '@angular/common';
   selector: 'app-user-table',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './user-table.component.html',
+  templateUrl: './user-table.component.html'
 })
-export class UserTableComponent {
+export class UserTableComponent implements OnInit {
   users: User[] = [];
-  filterText = '';
-  sortField: keyof User = 'name';
-  sortAsc = true;
+  filterText: string = '';
+  sortField: keyof User = 'id';
+  sortAsc: boolean = true;
 
-  constructor(private userService: UserService) {
-    this.userService.users$.subscribe((users) => (this.users = users));
-  }
+  constructor(private userService: UserService) {}
 
-  get filteredUsers(): User[] {
-    return this.users.filter((user) =>
-      user.name.toLowerCase().includes(this.filterText.toLowerCase())
-    );
-  }
+  ngOnInit(): void {
+    this.loadUsers();
 
-  sortUsers() {
-    this.users.sort((a, b) => {
-      const valueA = a[this.sortField];
-      const valueB = b[this.sortField];
-
-      if (typeof valueA === 'number' && typeof valueB === 'number') {
-        return this.sortAsc ? valueA - valueB : valueB - valueA;
-      }
-
-      return this.sortAsc
-        ? String(valueA).localeCompare(String(valueB))
-        : String(valueB).localeCompare(String(valueA));
+    document.addEventListener('userAdded', () => {
+      this.loadUsers();
     });
   }
 
-  toggleSort(field: keyof User) {
+  loadUsers(): void {
+    this.userService.getUsers().subscribe((data: User[]) => {
+      this.users = data;
+    });
+  }
+
+  deleteUser(id: number): void {
+    this.userService.deleteUser(id).subscribe(() => {
+      this.loadUsers();
+    });
+  }
+
+  toggleSort(field: keyof User): void {
     if (this.sortField === field) {
       this.sortAsc = !this.sortAsc;
     } else {
       this.sortField = field;
       this.sortAsc = true;
     }
-    this.sortUsers();
+  }
+
+  get filteredUsers(): User[] {
+    let filtered = this.users.filter(user =>
+      user.name.toLowerCase().includes(this.filterText.toLowerCase())
+    );
+
+    filtered.sort((a, b) => {
+      const aValue = a[this.sortField];
+      const bValue = b[this.sortField];
+
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        return this.sortAsc ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+      } else if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return this.sortAsc ? aValue - bValue : bValue - aValue;
+      }
+      return 0;
+    });
+
+    return filtered;
   }
 }
