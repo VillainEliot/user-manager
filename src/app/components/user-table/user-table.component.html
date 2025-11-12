@@ -23,19 +23,20 @@
       <th class="py-2 px-4 border cursor-pointer" (click)="toggleSort('role')">
         Rôle <span *ngIf="sortField==='role'">{{ sortAsc ? '▲' : '▼' }}</span>
       </th>
+      <th class="py-2 px-4 border">Actions</th>
     </tr>
     </thead>
     <tbody class="divide-y divide-gray-200">
-    <tr *ngFor="let user of filteredUsers" class="hover:bg-gray-50 transition-colors">
+    <tr *ngFor="let user of paginatedUsers" class="hover:bg-gray-50 transition-colors">
       <td class="px-4 py-2">{{ user.id }}</td>
       <td class="px-4 py-2">{{ user.name }}</td>
-      <td class="px-4 py-2">{{ user.email }}</td><td class="py-2 px-4 border">
-      <!-- Affiche une icône selon le rôle -->
-      <span *ngIf="user.role === 'admin'">🛡️</span>
-      <span *ngIf="user.role === 'user'">👤</span>
-      {{ user.role }}
+      <td class="px-4 py-2">{{ user.email }}</td>
+      <td class="px-4 py-2">
+        <span *ngIf="user.role === 'admin'">🛡️</span>
+        <span *ngIf="user.role === 'user'">👤</span>
+        {{ user.role }}
       </td>
-      <td class="py-2 px-4 border text-center">
+      <td class="px-4 py-2 text-center">
         <button (click)="deleteUser(user.id)"
                 class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
           Supprimer
@@ -43,10 +44,30 @@
       </td>
     </tr>
     <tr *ngIf="filteredUsers.length === 0">
-      <td colspan="4" class="px-4 py-4 text-center text-gray-500 italic">
+      <td colspan="5" class="px-4 py-4 text-center text-gray-500 italic">
         Aucun utilisateur trouvé
       </td>
     </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Pagination -->
+<div class="flex justify-center items-center mt-4 space-x-2">
+  <button (click)="previousPage()" [disabled]="currentPage === 1"
+          class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50">
+    Précédent
+  </button>
+
+  <button *ngFor="let page of [].constructor(totalPages); let i = index"
+          (click)="goToPage(i + 1)"
+          [class.font-bold]="currentPage === i + 1"
+          class="px-3 py-1 rounded border hover:bg-gray-100">
+    {{ i + 1 }}
+  </button>
+
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+          class="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50">
+    Suivant
+  </button>
 </div>
