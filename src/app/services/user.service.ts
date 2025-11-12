@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface User {
   id: number;
@@ -14,25 +13,19 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/users';
-  private usersSubject = new BehaviorSubject<User[]>([]);
-  users$ = this.usersSubject.asObservable();
+  private apiUrl = 'http://localhost:3000/users'; // ✅ ton backend Express
 
-  constructor(private http: HttpClient) {
-    this.loadUsers();
+  constructor(private http: HttpClient) {}
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiUrl);
   }
 
-  loadUsers() {
-    this.http.get<User[]>(this.apiUrl).subscribe((users) => this.usersSubject.next(users));
+  addUser(user: Omit<User, 'id'>): Observable<User> {
+    return this.http.post<User>(this.apiUrl, user);
   }
 
-  addUser(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user).pipe(
-      tap((newUser) => {
-        const current = this.usersSubject.getValue();
-        this.usersSubject.next([...current, newUser]);
-      })
-    );
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
-

@@ -35,6 +35,12 @@
       <span *ngIf="user.role === 'user'">👤</span>
       {{ user.role }}
       </td>
+      <td class="py-2 px-4 border text-center">
+        <button (click)="deleteUser(user.id)"
+                class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+          Supprimer
+        </button>
+      </td>
     </tr>
     <tr *ngIf="filteredUsers.length === 0">
       <td colspan="4" class="px-4 py-4 text-center text-gray-500 italic">
