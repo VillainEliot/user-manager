@@ -15,11 +15,16 @@ export class UserTableComponent implements OnInit {
   sortField: keyof User = 'id';
   sortAsc: boolean = true;
 
+  // Pagination
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.loadUsers();
 
+    // Met à jour la liste automatiquement après ajout
     document.addEventListener('userAdded', () => {
       this.loadUsers();
     });
@@ -64,5 +69,30 @@ export class UserTableComponent implements OnInit {
     });
 
     return filtered;
+  }
+
+  // Pagination helpers
+  get totalPages(): number {
+    return Math.ceil(this.filteredUsers.length / this.itemsPerPage);
+  }
+
+  get paginatedUsers(): User[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredUsers.slice(start, end);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) this.currentPage--;
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) this.currentPage++;
   }
 }
